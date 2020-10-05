@@ -60,7 +60,7 @@ namespace Lab1SemiMarkovProcess
             {
                 int updateT = rndSelect(variants);
                 double jumpT = timeJumpFunc(t, updateT, times[updateT]);
-                funWrite(k+1, variants, updateT+1, jumpT, t+1);
+                funWrite(k, variants, updateT, jumpT, t);
 
                 variants = listStahM[updateT];
                 times = listMTime[updateT];
@@ -76,25 +76,26 @@ namespace Lab1SemiMarkovProcess
                     label10.Text = progressBar1.Value.ToString() + "%";
                 }
             }
-
+            
             for (int i = 0; i < matrStatist.Count; i++)
             {
                 for (int j = 0; j < matrStatist[i].Length; j++)
                     richTextBox1.Text += matrStatist[i][j].ToString() + " ";
                 richTextBox1.Text += "\n";
             }
+            /*int sum = 0;
+            for (int i = 0; i<matrStatist.Count; i++)
+                sum += matrStatist[i].Sum();
+            richTextBox1.Text += k.ToString() + " = " + sum + "\n";*/
 
         }
 
         private int rndSelect(double[] mas)
         {
             double a = mas.Sum();
-            if (a < 1) mas[0] += 1 - mas[0];
-
-            Random rnd = new Random();
-            int value = rnd.Next(0, mas.Length);
-
-            return value;
+            if (a < 1) mas[0] += 1 - a;
+            
+            return new Random().Next(0, mas.Length);
         }
 
         private double timeJumpFunc(int t, int updateT, int zn)
@@ -103,41 +104,38 @@ namespace Lab1SemiMarkovProcess
             {
                 switch (zn) {
                     case 1: return masTimeParam[updateT];
-                    case 2: return rnd_func(masTimeParam[updateT]);
+                    case 2: return rndFunc(masTimeParam[updateT]);
                     default: break;
                 }
-            }
+            } 
+
             switch (zn)
             {
                 case 1: return listTParam[t][updateT];
-                case 2: return rnd_func(listTParam[t][updateT]);
+                case 2: return rndFunc(listTParam[t][updateT]);
                 default: break;
             }
-
-            return 0;
+            
+            return -1;
         }
 
-        private double rnd_func(int data)
+        private double rndFunc(int data)
         {
-            /*
-             if type(data) == list:
-            data = data[0]
-        return random.expovariate(data)*/
-            return (data < 0 ? 0 : 1 - Math.Exp(-1 / data));
+            return -Math.Log(1.0 - new Random().NextDouble()) /data;
         }
 
         private void funWrite(int k, double[] variants, int updateT, double jumpT, int t)
-        {
-            if (t < 1 || t > 2) t = t % matrStatist.Count;
-            if (updateT < 1 || updateT > 2) updateT = updateT % matrStatist[t].Length;
-
-            matrStatist[t][updateT] += 1;
-            richTextBox1.Text += k.ToString() + ") \t" + t.ToString() + " --> " + updateT.ToString() + 
-                                " ( " + Math.Round(jumpT, 3).ToString() + " ) " + "\t[ ";
-            for (int i = 0; i < variants.Length-1; i++)
+        {            
+            if (t != -1) matrStatist[t][updateT] += 1;
+                        
+            richTextBox1.Text += (k+1).ToString() + ")\t" + (t + 1).ToString() + "-->" + (updateT + 1).ToString() +
+                                " <- " + Math.Round(jumpT, 3).ToString() + " -> " + "\t[ ";
+          
+            for (int i = 0; i < variants.Length - 1; i++)
                 richTextBox1.Text += variants[i] + " ";
-            richTextBox1.Text += variants[variants.Length-1] + " ]";
+            richTextBox1.Text += variants[variants.Length - 1] + " ]";
             richTextBox1.Text += "\n";
+            
         }
 
         //получение данных
