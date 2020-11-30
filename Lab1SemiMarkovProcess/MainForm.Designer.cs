@@ -46,9 +46,8 @@
             this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -210,38 +209,31 @@
             this.textBox1.Text = "1000";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(304, 150);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(556, 23);
-            this.progressBar1.TabIndex = 17;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(300, 134);
+            this.label9.Location = new System.Drawing.Point(204, 139);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(119, 13);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Процесс выполнения:";
+            this.label9.Size = new System.Drawing.Size(101, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Кол-во процессов:";
             // 
-            // label10
+            // textBox2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(426, 134);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(0, 13);
-            this.label10.TabIndex = 19;
+            this.textBox2.Location = new System.Drawing.Point(303, 136);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(52, 20);
+            this.textBox2.TabIndex = 18;
+            this.textBox2.Text = "1";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(873, 462);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.richTextBox7);
@@ -289,9 +281,8 @@
         private System.Windows.Forms.RichTextBox richTextBox7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

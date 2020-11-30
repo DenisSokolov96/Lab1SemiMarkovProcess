@@ -8,9 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace Lab1SemiMarkovProcess
-{
+{    
     public partial class MainForm : Form
     {
         //вероятности переходов
@@ -30,6 +31,8 @@ namespace Lab1SemiMarkovProcess
         //кол-во итераций
         private int countIter = 0;
         private bool flag;
+        //кол-во процессов
+        private int countProcc = 0;
 
         public MainForm()
         {
@@ -39,44 +42,84 @@ namespace Lab1SemiMarkovProcess
         private void запуститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             readDatas();
-            progressBar1.Value = 10;
-            label10.Text = progressBar1.Value.ToString() + "%";
-            if (!flag) computation();
-            progressBar1.Value = 100;
-            label10.Text = progressBar1.Value.ToString() + "%";
-            richTextBox1.SelectionStart = richTextBox1.TextLength;
-            richTextBox1.ScrollToCaret();
+            if (!flag)
+            {            
+                //несколько процессов
+                for (int i = 0; i < countProcc; i++)
+                {
+                    computation(i+1);
+                    richTextBox1.SelectionStart = richTextBox1.TextLength;
+                    richTextBox1.ScrollToCaret();
+                }
+            }  else richTextBox1.SelectionStart = richTextBox1.TextLength;
+
         }
 
         //основная функция
-        private void computation()
-        {
+        private void computation(int ifile)
+        {            
             double[] variants = startMas.ToArray();
             int[] times = masTime.ToArray();
             int k = 0;
             int t = -1;
-            int proc = countIter / 90;
+            StreamWriter file = new StreamWriter("D:\\Универ\\2й курс магистратура\\Моделирование систем\\TimelineBuilder\\data" + ifile.ToString() + ".txt");
+            var sw = new Stopwatch();
+            sw.Start();
+            int updateT = 0;
+            double jumpT = 0;
+            /*int updateT = rndSelect(variants);
+            double jumpT = timeJumpFunc(t, updateT, times[updateT]);
+            funWrite(k, variants, updateT, jumpT, t);
+            file.WriteLine(updateT + 1);
+            variants = listStahM[updateT];
+            times = listMTime[updateT];
+            t = updateT;
+            k++;*/
+
             while (k < countIter)
             {
-                int updateT = rndSelect(variants);
-                double jumpT = timeJumpFunc(t, updateT, times[updateT]);
-                funWrite(k, variants, updateT, jumpT, t);
 
-                variants = listStahM[updateT];
-                times = listMTime[updateT];
-
-                t = updateT;
-
-                k++;
-                proc--;
-                if (proc == 0)
+                if (k == 0)
                 {
-                    proc = countIter / 90;
-                    progressBar1.Value++;
-                    label10.Text = progressBar1.Value.ToString() + "%";
+                    sw.Start();
+                    /*int*/
+                    updateT = rndSelect(variants);
+                    /*double*/
+                    jumpT = timeJumpFunc(t, updateT, times[updateT]);
+                    funWrite(k, variants, updateT, jumpT, t);
+                    file.WriteLine(updateT + 1);
+
+                    variants = listStahM[updateT];
+                    times = listMTime[updateT];
+
+                    t = updateT;
+
+                    k++;                    
                 }
+                else if (sw.ElapsedMilliseconds < 1) k++;
+                else
+                {
+                    sw.Restart();
+                    updateT = rndSelect(variants);
+                    jumpT = timeJumpFunc(t, updateT, times[updateT]);
+                    funWrite(k, variants, updateT, jumpT, t);
+                    file.WriteLine(updateT + 1);
+
+                    variants = listStahM[updateT];
+                    times = listMTime[updateT];
+
+                    t = updateT;
+
+                    k++;
+                }
+                
+                
+                
+
             }
-            
+            file.Close();
+
+            //вывожу матрицу прыжков
             for (int i = 0; i < matrStatist.Count; i++)
             {
                 for (int j = 0; j < matrStatist[i].Length; j++)
@@ -133,9 +176,7 @@ namespace Lab1SemiMarkovProcess
           
             for (int i = 0; i < variants.Length - 1; i++)
                 richTextBox1.Text += variants[i] + " ";
-            richTextBox1.Text += variants[variants.Length - 1] + " ]";
-            richTextBox1.Text += "\n";
-            
+            richTextBox1.Text += variants[variants.Length - 1] + " ]" + "\n";          
         }
 
         //получение данных
@@ -144,6 +185,7 @@ namespace Lab1SemiMarkovProcess
             try
             {
                 countIter = Convert.ToInt32(textBox1.Text);
+                countProcc = Convert.ToInt32(textBox2.Text);
 
                 for (int i = 0; i < richTextBox2.Lines.Length; i++)                              
                     listStahM.Add(Array.ConvertAll(richTextBox2.Lines[i].Split(' '), Double.Parse));
