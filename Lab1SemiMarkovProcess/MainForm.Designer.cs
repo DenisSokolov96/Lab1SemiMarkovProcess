@@ -48,6 +48,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox1.Location = new System.Drawing.Point(12, 179);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(848, 271);
+            this.richTextBox1.Size = new System.Drawing.Size(848, 363);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -86,7 +88,7 @@
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(125, 73);
             this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "0,5 0,25 0,25\n0,5 0 0,5\n0,67 0,33 0";
+            this.richTextBox2.Text = "";
             // 
             // label1
             // 
@@ -157,7 +159,7 @@
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(125, 73);
             this.richTextBox3.TabIndex = 10;
-            this.richTextBox3.Text = "2\n1\n1";
+            this.richTextBox3.Text = "";
             // 
             // richTextBox4
             // 
@@ -165,7 +167,7 @@
             this.richTextBox4.Name = "richTextBox4";
             this.richTextBox4.Size = new System.Drawing.Size(125, 73);
             this.richTextBox4.TabIndex = 11;
-            this.richTextBox4.Text = "2\n5\n8";
+            this.richTextBox4.Text = "";
             // 
             // richTextBox5
             // 
@@ -173,7 +175,7 @@
             this.richTextBox5.Name = "richTextBox5";
             this.richTextBox5.Size = new System.Drawing.Size(125, 73);
             this.richTextBox5.TabIndex = 12;
-            this.richTextBox5.Text = "0,3333\n0,3333\n0,3333";
+            this.richTextBox5.Text = "";
             // 
             // richTextBox6
             // 
@@ -181,7 +183,7 @@
             this.richTextBox6.Name = "richTextBox6";
             this.richTextBox6.Size = new System.Drawing.Size(125, 73);
             this.richTextBox6.TabIndex = 13;
-            this.richTextBox6.Text = "2 2 2\n2 2 2\n2 2 2";
+            this.richTextBox6.Text = "";
             // 
             // richTextBox7
             // 
@@ -189,24 +191,24 @@
             this.richTextBox7.Name = "richTextBox7";
             this.richTextBox7.Size = new System.Drawing.Size(125, 73);
             this.richTextBox7.TabIndex = 14;
-            this.richTextBox7.Text = "1 5 9\n3 6 8\n7 2 1";
+            this.richTextBox7.Text = "";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(13, 139);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 13);
+            this.label8.Size = new System.Drawing.Size(43, 13);
             this.label8.TabIndex = 15;
-            this.label8.Text = "Кол-во итераций:";
+            this.label8.Text = "Время:";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(113, 136);
+            this.textBox1.Location = new System.Drawing.Point(81, 136);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(48, 20);
+            this.textBox1.Size = new System.Drawing.Size(80, 20);
             this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "1000";
+            this.textBox1.Text = "1000000";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
@@ -227,11 +229,30 @@
             this.textBox2.Text = "1";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(804, 136);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(53, 21);
+            this.comboBox1.TabIndex = 19;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(681, 139);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(117, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Номер эксперимента";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 462);
+            this.ClientSize = new System.Drawing.Size(873, 554);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox1);
@@ -283,6 +304,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label10;
     }
 }
 
