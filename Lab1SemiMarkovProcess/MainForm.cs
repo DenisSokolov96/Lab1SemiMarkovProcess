@@ -13,11 +13,7 @@ using System.Diagnostics;
 namespace Lab1SemiMarkovProcess
 {
     /*
-     * ормула для состояний =СЧЁТЕСЛИ($B2:$D2;H$1)
-     * Лягушка
-     * Молекула
-     * Блуждание
-     * Свое
+     * формула для состояний =СЧЁТЕСЛИ($B2:$D2;H$1)
      */
 
     public partial class MainForm : Form
@@ -46,6 +42,7 @@ namespace Lab1SemiMarkovProcess
         private StringBuilder reportStr = new StringBuilder();
         //счетчик прыжков
         private int jumpCount = 0;
+        Random rnd = new Random();
 
         public MainForm()
         {
@@ -83,6 +80,13 @@ namespace Lab1SemiMarkovProcess
 
                     stateData.Clear();
                     reportStr.Clear();
+                    jumpCount = 0;
+
+                    for (int indI = 0; indI < matrStatist.Count(); indI++)                    
+                        for (int indJ = 0; indJ < matrStatist[i].Length; indJ++)
+                            matrStatist[indI][indJ] = 0;
+                    
+
                 }
             }
             richTextBox1.Text += "\n\n";
@@ -119,7 +123,7 @@ namespace Lab1SemiMarkovProcess
                 }                
                                 
                 stateData.AppendLine((curStateIndex+1).ToString());
-                actionT = actionT - 0.001;
+                actionT -= 0.001;
                 k++;
 
             }
@@ -142,8 +146,8 @@ namespace Lab1SemiMarkovProcess
         {
             double a = mas.Sum();
             if (a < 1) mas[0] += 1 - a;
-            
-            return new Random().Next(0, mas.Length);
+
+            return rnd.Next(0, mas.Length);
         }
 
         //Определяем время прыжка
@@ -170,7 +174,7 @@ namespace Lab1SemiMarkovProcess
 
         private double rndFunc(double data)
         {
-            return -Math.Log(1.0 - new Random().NextDouble()) /data;
+            return -Math.Log(1.0 - rnd.NextDouble()) /data;
         }
 
         //вывод результирующей матрицы на экран
@@ -197,6 +201,7 @@ namespace Lab1SemiMarkovProcess
         private string writeDatas(int index, double[] stah, int newState, double t, int state)
         {
             string str = "";            
+
             if (state == -1) matrStatist[0][newState] += 1;
             else matrStatist[state][newState] += 1;
 
